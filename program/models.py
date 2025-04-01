@@ -32,6 +32,25 @@ class Program(models.Model):
     def __str__(self):
         return self.name
     
+class Season(models.Model):
+    """ Model from seasons"""
+
+    name = models.CharField(max_length=200)
+    description = models.TextField(blank=True, null=True)
+    image = models.ImageField(upload_to='seasons/', blank=True, null=True)
+    program = models.ForeignKey('Program', on_delete=models.CASCADE, related_name='season_program')
+    release_date = models.DateField(blank=True, null=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Temporada'
+        verbose_name_plural = 'Listado de Temporadas'
+
+    def __str__(self):
+        return self.name
+    
 
 class Episodes(models.Model):
     """ Model from episodes"""
@@ -41,6 +60,7 @@ class Episodes(models.Model):
     image = models.ImageField(upload_to='episodes/', blank=True, null=True)
     duration = models.IntegerField()
     program = models.ForeignKey('Program', on_delete=models.CASCADE, related_name='program')
+    Season = models.ForeignKey('Season', on_delete=models.CASCADE, related_name='season', blank=True, null=True)
     cast = models.ManyToManyField('core.Actor', related_name='cast_actors')
     release_date = models.DateField(blank=True, null=True)
 
