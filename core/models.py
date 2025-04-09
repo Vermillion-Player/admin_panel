@@ -3,10 +3,10 @@ from django.db import models
 class Category(models.Model):
     """ Model from categories"""
 
-    name = models.CharField(max_length=200)
-    description = models.TextField(blank=True, null=True)
-    only_adult = models.BooleanField(default=False)
-    logo = models.ImageField(upload_to='categories/', blank=True, null=True)
+    name = models.CharField(max_length=200, verbose_name="Nombre")
+    description = models.TextField(blank=True, verbose_name="Descripción", null=True)
+    only_adult = models.BooleanField(default=False, verbose_name="Solo adultos")
+    logo = models.ImageField(upload_to='categories/', verbose_name="Logo", blank=True, null=True)
 
 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -29,15 +29,15 @@ class Actor(models.Model):
         ('T', 'Transgénero'),
     )
 
-    name = models.CharField(max_length=200)
-    description = models.TextField(blank=True, null=True)
-    image = models.ImageField(upload_to='actors/', blank=True, null=True)
-    birthdate = models.DateField(blank=True, null=True)
-    birthplace = models.CharField(max_length=200, blank=True, null=True)
-    height = models.FloatField(blank=True, null=True)
-    weight = models.FloatField(blank=True, null=True)
-    genre = models.CharField(max_length=200, blank=True, null=True, choices=GENRE)
-    only_adult = models.BooleanField(default=False)
+    name = models.CharField(max_length=200, verbose_name="Nombre")
+    description = models.TextField(blank=True, verbose_name="Descripción", null=True)
+    image = models.ImageField(upload_to='actors/', verbose_name="Foto", blank=True, null=True)
+    birthdate = models.DateField(blank=True, verbose_name="Fecha de nacimiento", null=True)
+    birthplace = models.CharField(max_length=200, verbose_name="Origen", blank=True, null=True)
+    height = models.FloatField(blank=True, verbose_name="Altura", null=True)
+    weight = models.FloatField(blank=True, verbose_name="Peso", null=True)
+    genre = models.CharField(max_length=200, verbose_name="Género", blank=True, null=True, choices=GENRE)
+    only_adult = models.BooleanField(default=False, verbose_name="Solo adultos")
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

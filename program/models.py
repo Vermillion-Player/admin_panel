@@ -13,14 +13,14 @@ class Program(models.Model):
         ('X', 'Solo adultos'),
     )
 
-    name = models.CharField(max_length=200)
-    description = models.TextField(blank=True, null=True)
-    image = models.ImageField(upload_to='programs/', blank=True, null=True)
-    only_adult = models.CharField(max_length=200, blank=True, null=True, choices=AGE_PROGRAMS)
-    main_category = models.ForeignKey('core.Category', on_delete=models.CASCADE, related_name='program_main_category')
-    other_categories = models.ManyToManyField('core.Category', related_name='program_other_categories')
-    actors = models.ManyToManyField('core.Actor', related_name='actors')
-    release_date = models.DateField(blank=True, null=True)
+    name = models.CharField(max_length=200, verbose_name="Nombre")
+    description = models.TextField(blank=True, verbose_name="Descripción", null=True)
+    image = models.ImageField(upload_to='programs/', verbose_name="Cartel", blank=True, null=True)
+    only_adult = models.CharField(max_length=200, verbose_name="Solo adultos", blank=True, null=True, choices=AGE_PROGRAMS)
+    main_category = models.ForeignKey('core.Category', verbose_name="Categoría principal", on_delete=models.CASCADE, related_name='program_main_category')
+    other_categories = models.ManyToManyField('core.Category', verbose_name="Otras categorías", related_name='program_other_categories')
+    actors = models.ManyToManyField('core.Actor', verbose_name="Reparto", related_name='actors')
+    release_date = models.DateField(blank=True, verbose_name="Estreno", null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -35,11 +35,11 @@ class Program(models.Model):
 class Season(models.Model):
     """ Model from seasons"""
 
-    name = models.CharField(max_length=200)
-    description = models.TextField(blank=True, null=True)
-    image = models.ImageField(upload_to='seasons/', blank=True, null=True)
-    program = models.ForeignKey('Program', on_delete=models.CASCADE, related_name='season_program')
-    release_date = models.DateField(blank=True, null=True)
+    name = models.CharField(max_length=200, verbose_name="Nombre")
+    description = models.TextField(blank=True, verbose_name="Descripción", null=True)
+    image = models.ImageField(upload_to='seasons/', verbose_name="Cartel", blank=True, null=True)
+    program = models.ForeignKey('Program', verbose_name="Programa", on_delete=models.CASCADE, related_name='season_program')
+    release_date = models.DateField(blank=True, verbose_name="Estreno", null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -55,14 +55,14 @@ class Season(models.Model):
 class Episodes(models.Model):
     """ Model from episodes"""
 
-    name = models.CharField(max_length=200)
-    description = models.TextField(blank=True, null=True)
-    image = models.ImageField(upload_to='episodes/', blank=True, null=True)
-    duration = models.IntegerField()
-    program = models.ForeignKey('Program', on_delete=models.CASCADE, related_name='program')
-    Season = models.ForeignKey('Season', on_delete=models.CASCADE, related_name='season', blank=True, null=True)
-    cast = models.ManyToManyField('core.Actor', related_name='cast_actors')
-    release_date = models.DateField(blank=True, null=True)
+    name = models.CharField(max_length=200, verbose_name="Nombre")
+    description = models.TextField(blank=True, verbose_name="Descripción", null=True)
+    image = models.ImageField(upload_to='episodes/', verbose_name="Imagen", blank=True, null=True)
+    duration = models.IntegerField(verbose_name="Duración", blank=True, null=True)
+    program = models.ForeignKey('Program', verbose_name="Programa", on_delete=models.CASCADE, related_name='program')
+    Season = models.ForeignKey('Season', verbose_name="Temporada", on_delete=models.CASCADE, related_name='season', blank=True, null=True)
+    cast = models.ManyToManyField('core.Actor', verbose_name="Reparto", related_name='cast_actors')
+    release_date = models.DateField(blank=True, verbose_name="Estreno", null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

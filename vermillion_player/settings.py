@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "graphene_django",
     "core",
     "channel",
     "program",
@@ -55,6 +56,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
 
 ROOT_URLCONF = "vermillion_player.urls"
 
@@ -147,3 +149,6 @@ class CustomAdminSite(admin.AdminSite):
 
 admin.site = CustomAdminSite()
 
+GRAPHENE = {
+    "SCHEMA": "channel.schema.schema"
+}
