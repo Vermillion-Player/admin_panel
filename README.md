@@ -31,9 +31,10 @@ Para trabajar sin contenedores el proyecto hacemos lo siguiente en linux o utili
 2. Crear entorno virtual: ``python -m venv .env``
 3. Arrancar entorno virtual: ``source .env/bin/activate``
 4. Instalar dependencias: ``pip install -r requirements.txt``
-5. Lanzar migraciones: ``python manage.py migrate``
-6. Crear usuario admin: ``python manage.py createsuperuser``
-7. Arrancar servidor: ``python manage.py runserver``
+5. Crear migraciones: ``python manage.py makemigrations``
+6. Lanzar migraciones: ``python manage.py migrate``
+7. Crear usuario admin: ``python manage.py createsuperuser``
+8. Arrancar servidor: ``python manage.py runserver``
 
 ## Rutas de acceso
 
