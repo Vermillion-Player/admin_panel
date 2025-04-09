@@ -1,4 +1,5 @@
 from django.db import models
+from channel.models import Channel
 
 class Program(models.Model):
     """ Model from programs"""
@@ -21,6 +22,7 @@ class Program(models.Model):
     other_categories = models.ManyToManyField('core.Category', verbose_name="Otras categorías", related_name='program_other_categories')
     actors = models.ManyToManyField('core.Actor', verbose_name="Reparto", related_name='actors')
     release_date = models.DateField(blank=True, verbose_name="Estreno", null=True)
+    channel = models.ForeignKey(Channel, on_delete=models.CASCADE, verbose_name="Canal")
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -60,7 +62,7 @@ class Episodes(models.Model):
     image = models.ImageField(upload_to='episodes/', verbose_name="Imagen", blank=True, null=True)
     duration = models.IntegerField(verbose_name="Duración", blank=True, null=True)
     program = models.ForeignKey('Program', verbose_name="Programa", on_delete=models.CASCADE, related_name='program')
-    Season = models.ForeignKey('Season', verbose_name="Temporada", on_delete=models.CASCADE, related_name='season', blank=True, null=True)
+    season = models.ForeignKey('Season', verbose_name="Temporada", on_delete=models.CASCADE, related_name='season', blank=True, null=True)
     cast = models.ManyToManyField('core.Actor', verbose_name="Reparto", related_name='cast_actors')
     release_date = models.DateField(blank=True, verbose_name="Estreno", null=True)
 

@@ -1,4 +1,5 @@
 from django.db import models
+from channel.models import Channel
 
 class Movie(models.Model):
     """ Model from movies"""
@@ -10,6 +11,7 @@ class Movie(models.Model):
     release_date = models.DateField(blank=True, verbose_name="Fecha de estreno", null=True)
     only_adult = models.BooleanField(default=False, verbose_name="Solo adultos")
     cast = models.ManyToManyField('core.Actor', verbose_name="Reparto", related_name='movie_cast_actors')
+    channel = models.ForeignKey(Channel, on_delete=models.CASCADE, verbose_name="Canal")
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

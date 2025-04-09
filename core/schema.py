@@ -3,6 +3,7 @@ from .models import Category, Actor
 from .types import CategoryType, ActorType
 from channel.schema import ChannelQuery
 from movie.schema import MovieQuery
+from program.schema import ProgramQuery, SeasonQuery, EpisodesQuery
 
 class CategoryQuery(graphene.ObjectType):
     all_categories = graphene.List(CategoryType)
@@ -38,6 +39,9 @@ class Query(
     ActorQuery,
     ChannelQuery, 
     MovieQuery,
+    ProgramQuery,
+    SeasonQuery,
+    EpisodesQuery,
     graphene.ObjectType):
     pass
 

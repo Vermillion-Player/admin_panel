@@ -13,5 +13,6 @@ class MovieType(DjangoObjectType):
             "duration", 
             "release_date", 
             "only_adult", 
-            "cast"
+            "cast",
+            "channel"
             )
