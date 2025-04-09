@@ -150,5 +150,5 @@ class CustomAdminSite(admin.AdminSite):
 admin.site = CustomAdminSite()
 
 GRAPHENE = {
-    "SCHEMA": "channel.schema.schema"
+    "SCHEMA": "core.schema.schema"
 }

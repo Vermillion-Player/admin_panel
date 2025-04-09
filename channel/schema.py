@@ -1,14 +1,8 @@
 import graphene
-from graphene_django import DjangoObjectType
-
 from .models import Channel
+from .types import ChannelType
 
-class ChannelType(DjangoObjectType):
-    class Meta:
-        model = Channel
-        fields = ("id", "name", "description", "logo", "only_adult", "main_category", "other_categories")
-
-class Query(graphene.ObjectType):
+class ChannelQuery(graphene.ObjectType):
     all_channels = graphene.List(ChannelType)
     channel_by_name = graphene.Field(ChannelType, name=graphene.String(required=True))
 
@@ -20,5 +14,3 @@ class Query(graphene.ObjectType):
             return Channel.objects.get(name=name)
         except Channel.DoesNotExist:
             return None
-
-schema = graphene.Schema(query=Query)

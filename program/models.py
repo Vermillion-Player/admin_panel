@@ -16,7 +16,7 @@ class Program(models.Model):
     name = models.CharField(max_length=200, verbose_name="Nombre")
     description = models.TextField(blank=True, verbose_name="Descripción", null=True)
     image = models.ImageField(upload_to='programs/', verbose_name="Cartel", blank=True, null=True)
-    only_adult = models.CharField(max_length=200, verbose_name="Solo adultos", blank=True, null=True, choices=AGE_PROGRAMS)
+    age = models.CharField(max_length=200, verbose_name="Solo adultos", blank=True, null=True, choices=AGE_PROGRAMS)
     main_category = models.ForeignKey('core.Category', verbose_name="Categoría principal", on_delete=models.CASCADE, related_name='program_main_category')
     other_categories = models.ManyToManyField('core.Category', verbose_name="Otras categorías", related_name='program_other_categories')
     actors = models.ManyToManyField('core.Actor', verbose_name="Reparto", related_name='actors')
