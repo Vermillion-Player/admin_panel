@@ -1,7 +1,18 @@
 from django.contrib import admin
+from django.utils.html import format_html
 from core.models import *
 
 admin.site.site_header = 'General'
 
-admin.site.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ("id", "imagen", "name", "only_adult")
+    list_filter = ("name", "only_adult")
+
+    def imagen(self, obj):
+        try:
+            return format_html("<img src={} height='75' />", obj.logo.url)
+        except:
+            return ""
+
+admin.site.register(Category, CategoryAdmin)
 admin.site.register(Actor)

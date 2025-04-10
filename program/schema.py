@@ -5,6 +5,7 @@ from .types import ProgramType, SeasonType, EpisodesType
 class ProgramQuery(graphene.ObjectType):
     all_programs = graphene.List(ProgramType)
     program_by_name = graphene.Field(ProgramType, name=graphene.String(required=True))
+    program_by_id = graphene.Field(ProgramType, id=graphene.Int(required=True))
 
     def resolve_all_programs(root, info):
         return Program.objects.all()
@@ -12,6 +13,12 @@ class ProgramQuery(graphene.ObjectType):
     def resolve_program_by_name(root, info, name):
         try:
             return Program.objects.get(name=name)
+        except Program.DoesNotExist:
+            return None
+        
+    def resolve_program_by_id(root, info, id):
+        try:
+            return Program.objects.get(id=id)
         except Program.DoesNotExist:
             return None
 
