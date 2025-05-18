@@ -33,8 +33,9 @@ Para trabajar sin contenedores el proyecto hacemos lo siguiente en linux o utili
 4. Instalar dependencias: ``pip install -r requirements.txt``
 5. Crear migraciones: ``python manage.py makemigrations``
 6. Lanzar migraciones: ``python manage.py migrate``
-7. Crear usuario admin: ``python manage.py createsuperuser``
-8. Arrancar servidor: ``python manage.py runserver``
+7. Recolectar estáticos: ``python manage.py collectstatic``
+8. Crear usuario admin: ``python manage.py createsuperuser``
+9. Arrancar servidor: ``python manage.py runserver``
 
 ## Rutas de acceso
 
