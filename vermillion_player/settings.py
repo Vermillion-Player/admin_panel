@@ -126,6 +126,8 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 MEDIA_URL = '/media/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
@@ -151,4 +153,15 @@ admin.site = CustomAdminSite()
 
 GRAPHENE = {
     "SCHEMA": "core.schema.schema"
+}
+
+JAZZMIN_SETTINGS = {
+    "site_title": "Vermillion Player",
+    "site_logo": "img/logo.png",  
+    "site_logo_classes": "img-circle", 
+    "welcome_sign": "Bienvenido a Vermillion Player",
+    "site_header": "Panel de control",
+    "site_brand": "Vermillion Player",
+    "copyright": "Pytonicus",
+    "show_sidebar": True,
 }
