@@ -7,7 +7,7 @@ class Movie(models.Model):
     name = models.CharField(max_length=200, verbose_name="Nombre")
     description = models.TextField(blank=True, verbose_name="Descripción", null=True)
     image = models.ImageField(upload_to='movies/', verbose_name="Cartel", blank=True, null=True)
-    duration = models.FloatField(blank=True, verbose_name="Duración", null=True)
+    duration = models.IntegerField(blank=True, verbose_name="Duración", null=True)
     release_date = models.DateField(blank=True, verbose_name="Fecha de estreno", null=True)
     only_adult = models.BooleanField(default=False, verbose_name="Solo adultos")
     cast = models.ManyToManyField('core.Actor', verbose_name="Reparto", related_name='movie_cast_actors')
