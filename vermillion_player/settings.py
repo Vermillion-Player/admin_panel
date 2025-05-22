@@ -135,22 +135,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-class CustomAdminSite(admin.AdminSite):
-    def get_app_list(self, request):
-        app_list = super().get_app_list(request)
-        for app in app_list:
-            if app['name'] == 'Channel':
-                app['name'] = 'Canales'
-            elif app['name'] == 'Core':
-                app['name'] = 'Núcleo'
-            elif app['name'] == 'Movie':
-                app['name'] = 'Películas'
-            elif app['name'] == 'Program':
-                app['name'] = 'Programas'
-        return app_list
-
-admin.site = CustomAdminSite()
-
 GRAPHENE = {
     "SCHEMA": "core.schema.schema"
 }
@@ -162,6 +146,40 @@ JAZZMIN_SETTINGS = {
     "welcome_sign": "Bienvenido a Vermillion Player",
     "site_header": "Panel de control",
     "site_brand": "Vermillion Player",
-    "copyright": "Pytonicus",
+    "copyright": "Pytonicus - GNU GENERAL PUBLIC LICENSE Version 3",
     "show_sidebar": True,
+    "search_model": ["movie.Movie", "program.Program"],
+
+    "topmenu_links": [
+        {"model": "auth.User"},
+        {"app": "movie"},
+        {"app": "program"},
+        {"name": "CDN", "url": "http://127.0.0.1:5000", "new_window": True}
+    ],
+    "usermenu_links": [
+        {"name": "CDN", "url": "http://127.0.0.1:5000", "new_window": True},
+        {"model": "auth.user"}
+    ],
+
+    "order_with_respect_to": ["auth", "core", "channel", "movie", "program"],
+
+    "custom_links": {
+        "program": [{
+            "name": "Subir episodios", 
+            "url": "http://127.0.0.1:5000", 
+            "icon": "fas fa-cloud"
+        }
+        ]
+    },
+
+    "icons": {
+        "core.actor": "fas fa-theater-masks",
+        "core.category": "fas fa-folder-open",
+        "channel.channel": "fas fa-tv",
+        "movie.movie": "fas fa-film",
+        "program.program": "fas fa-clapperboard",
+        "program.season": "fas fa-list-ol",
+        "program.episodes": "fas fa-play-circle"
+    },
+
 }
