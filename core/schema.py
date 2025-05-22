@@ -7,28 +7,28 @@ from program.schema import ProgramQuery, SeasonQuery, EpisodesQuery
 
 class CategoryQuery(graphene.ObjectType):
     all_categories = graphene.List(CategoryType)
-    category_by_name = graphene.Field(CategoryType, name=graphene.String(required=True))
+    category_by_id = graphene.Field(CategoryType, id=graphene.Int(required=True))
 
     def resolve_all_categories(root, info):
         return Category.objects.all()
 
-    def resolve_category_by_name(root, info, name):
+    def resolve_category_by_id(root, info, id):
         try:
-            return Category.objects.get(name=name)
+            return Category.objects.get(id=id)
         except Category.DoesNotExist:
             return None
 
 
 class ActorQuery(graphene.ObjectType):
     all_actors = graphene.List(ActorType)
-    actor_by_name = graphene.Field(ActorType, name=graphene.String(required=True))
+    actor_by_id = graphene.Field(ActorType, id=graphene.Int(required=True))
 
     def resolve_all_actors(root, info):
         return Actor.objects.all()
     
-    def resolve_actor_by_name(root, info, name):
+    def resolve_actor_by_id(root, info, id):
         try:
-            return Actor.objects.get(name=name)
+            return Actor.objects.get(id=id)
         except:
             return None
 
