@@ -4,13 +4,13 @@ from .types import ChannelType
 
 class ChannelQuery(graphene.ObjectType):
     all_channels = graphene.List(ChannelType)
-    channel_by_name = graphene.Field(ChannelType, name=graphene.String(required=True))
+    channel_by_id = graphene.Field(ChannelType, id=graphene.Int(required=True))
 
     def resolve_all_channels(root, info):
         return Channel.objects.all()
 
-    def resolve_channel_by_name(root, info, name):
+    def resolve_channel_by_id(root, info, id):
         try:
-            return Channel.objects.get(name=name)
+            return Channel.objects.get(id=id)
         except Channel.DoesNotExist:
             return None
