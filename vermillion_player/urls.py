@@ -19,12 +19,24 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
+from graphql_jwt.middleware import JSONWebTokenMiddleware
 
 from graphene_django.views import GraphQLView
 
+class CustomGraphQLView(GraphQLView):
+    def get_context(self, request):
+        print("AUTH HEADER:", request.headers.get("Authorization"))
+        return request
+
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("graphql/", csrf_exempt(GraphQLView.as_view(graphiql=True))),
+    path("graphql/", csrf_exempt(
+        CustomGraphQLView.as_view(
+            graphiql=True,
+            middleware=[JSONWebTokenMiddleware()]
+            )
+        )
+    ),
 ]
 
 if settings.DEBUG:

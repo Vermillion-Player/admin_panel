@@ -27,6 +27,8 @@ class Actor(models.Model):
         ('M', 'Masculino'),
         ('F', 'Femenino'),
         ('T', 'Transgénero'),
+        ('NB', 'No Binario'),
+        ('O', 'Otro')
     )
 
     name = models.CharField(max_length=200, verbose_name="Nombre")
