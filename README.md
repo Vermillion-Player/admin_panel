@@ -51,7 +51,7 @@ En este aparatdo explico como autenticar en graphql mediante jwt y las queries q
 
 Para autenticarse utiliza la siguiente mutación:
 
-```json
+```
 mutation {
   tokenAuth(username: "prueba", password: "prueba_pass") {
     token
@@ -64,7 +64,7 @@ Esta te devolverá un token jwt que podrás utilizar en todas las queries. Para 
 
 Para poder hacer la petición en el cliente interactivo de graphql abajo pulsa la pestaña Headers y añade el token del siguiente modo:
 
-```json
+```
 {
   "Authorization": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 }
@@ -78,7 +78,7 @@ También dispone de dos mutaciones mas de apoyo:
 
 1. Verificar token (valida si el token esta activo):
 
-```json
+```
 mutation {
   verifyToken(token: "eyJ0eXAiOiJKV1QiLC...") {
     payload
@@ -88,7 +88,7 @@ mutation {
 
 2. Refrescar token (renueva el token para que se pueda reutilizar mas tiempo):
 
-```json
+```
 mutation {
   refreshToken(token: "eyJ0eXAiOiJKV1QiLC...") {
     token
@@ -103,7 +103,7 @@ mutation {
 
 1. Listado de canales:
 
-```json
+```
 query{
   allChannels{
     id
@@ -125,7 +125,7 @@ query{
 
 2. Canal por id:
 
-```json
+```
 query{
   channelById(id:1){
     id
@@ -149,7 +149,7 @@ query{
 
 1. Listado de categorías:
 
-```json
+```
 query{
   allCategories{
     id
@@ -163,7 +163,7 @@ query{
 
 2. Categoría por id:
 
-```json
+```
 query{
   categoryById(id:1){
     id
@@ -179,7 +179,7 @@ query{
 
 1. Listado de actores:
 
-```json
+```
 query{
   allActors{
     id
@@ -198,7 +198,7 @@ query{
 
 2. Actor por id:
 
-```json
+```
 query{
   actorById(id:1){
     id
@@ -219,7 +219,7 @@ query{
 
 1. Listado de peliculas:
 
-```json
+```
 query{
   allMovies{
     id
@@ -262,7 +262,7 @@ query{
 
 2. Película por id:
 
-```json
+```
 query{
   movieById(id:1){
     id
@@ -307,7 +307,7 @@ query{
 
 1. Listado de programas:
 
-```json
+```
 query{
   allPrograms{
     id
@@ -363,7 +363,7 @@ query{
 
 2. Programa por id:
 
-```json
+```
 query{
   programById(id:1){
     id
@@ -421,7 +421,7 @@ query{
 
 1. Listado de temporadas:
 
-```json
+```
 query{
   allSeasons{
     id
@@ -484,7 +484,7 @@ query{
 
 2. Temporada por id:
 
-```json
+```
 query{
   seasonById(id:1){
     id
@@ -549,7 +549,7 @@ query{
 
 1. Listado de episodios:
 
-```json
+```
 query{
   allEpisodes{
     id
@@ -681,7 +681,7 @@ query{
 
 2. Episodio por id:
 
-```json
+```
 query{
   episodesById(id:1){
     id
@@ -814,7 +814,7 @@ query{
 
 NOTA: Puedes elegir los campos que mostrar. Por ejemplo si del episodio no queremos tanta info podemos hacer una query mas sencilla:
 
-```json
+```
 query{
   allEpisodes{
     id
