@@ -12,6 +12,7 @@ class Movie(models.Model):
     only_adult = models.BooleanField(default=False, verbose_name="Solo adultos")
     cast = models.ManyToManyField('core.Actor', verbose_name="Reparto", related_name='movie_cast_actors')
     channel = models.ForeignKey(Channel, on_delete=models.CASCADE, verbose_name="Canal")
+    link = models.URLField(verbose_name="Enlace media", blank=True, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

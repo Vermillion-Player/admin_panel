@@ -44,5 +44,6 @@ class EpisodesType(DjangoObjectType):
             "program",
             "season",
             "cast",
-            "release_date"
+            "release_date",
+            "link"
         )

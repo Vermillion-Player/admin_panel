@@ -256,6 +256,7 @@ query{
         name
       }
     }
+    link
   }
 }
 ```
@@ -299,6 +300,7 @@ query{
         name
       }
     }
+    link
   }
 }
 ```
@@ -675,6 +677,7 @@ query{
       onlyAdult
     }
     releaseDate
+    link
   }
 }
 ```
@@ -807,6 +810,7 @@ query{
       onlyAdult
     }
     releaseDate
+    link
   }
 }
 ```
