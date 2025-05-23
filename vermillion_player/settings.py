@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 from pathlib import Path
 from django.contrib import admin
+from django.templatetags.static import static
+
+from django.urls import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -33,7 +36,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "jazzmin",
+    "unfold",  
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -151,48 +154,35 @@ AUTHENTICATION_BACKENDS = [
 
 
 # PANEL CUSTOMIZATIONS:
-
-JAZZMIN_SETTINGS = {
-    "site_title": "Vermillion Player",
-    "site_logo": "img/logo.png",  
-    "site_logo_classes": "img-circle", 
-    "welcome_sign": "Bienvenido a Vermillion Player",
-    "site_header": "Panel de control",
-    "site_brand": "Vermillion Player",
-    "copyright": "Pytonicus - GNU GENERAL PUBLIC LICENSE Version 3",
-    "show_sidebar": True,
-    "search_model": ["movie.Movie", "program.Program"],
-
-    "topmenu_links": [
-        {"model": "auth.User"},
-        {"app": "movie"},
-        {"app": "program"},
-        {"name": "CDN", "url": "http://127.0.0.1:5000", "new_window": True}
-    ],
-    "usermenu_links": [
-        {"name": "CDN", "url": "http://127.0.0.1:5000", "new_window": True},
-        {"model": "auth.user"}
-    ],
-
-    "order_with_respect_to": ["auth", "core", "channel", "movie", "program"],
-
-    "custom_links": {
-        "program": [{
-            "name": "Subir episodios", 
-            "url": "http://127.0.0.1:5000", 
-            "icon": "fas fa-cloud"
-        }
-        ]
+UNFOLD = {
+    "SITE_TITLE": "Vermillion Player - Panel",
+    "SITE_HEADER": "Vermillion Player",
+    "SITE_SUBHEADER": "Gestión de contenidos",
+    "SITE_DROPDOWN": [
+        {
+        "icon": "diamond",
+        "title": "CDN",
+        "link": "http://127.0.0.1:1500"
     },
-
-    "icons": {
-        "core.actor": "fas fa-theater-masks",
-        "core.category": "fas fa-folder-open",
-        "channel.channel": "fas fa-tv",
-        "movie.movie": "fas fa-film",
-        "program.program": "fas fa-clapperboard",
-        "program.season": "fas fa-list-ol",
-        "program.episodes": "fas fa-play-circle"
+    ],
+    "SITE_ICON": {
+        "light": lambda request: static("img/logo.png"),
+        "dark": lambda request: static("img/logo.png")
     },
+    "SITE_FAVICONS": [
+        {
+            "rel": "icon",
+            "sizes": "32x32",
+            "type": "image/png",
+            "href": lambda request: static("img/logo.png"),
+        },
+    ],
 
+    "STYLES": [
+        lambda request: static("css/style.css"),
+    ],
+    "SCRIPTS": [
+        lambda request: static("js/script.js"),
+    ],
+    
 }
