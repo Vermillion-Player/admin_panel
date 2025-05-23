@@ -26,7 +26,6 @@ env/
 # Media and static files
 debug.log
 media/
-static/
 staticfiles/
 
 # IDEs
