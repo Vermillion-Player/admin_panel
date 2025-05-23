@@ -65,6 +65,7 @@ class Episodes(models.Model):
     season = models.ForeignKey('Season', verbose_name="Temporada", on_delete=models.CASCADE, related_name='season', blank=True, null=True)
     cast = models.ManyToManyField('core.Actor', verbose_name="Reparto", related_name='cast_actors')
     release_date = models.DateField(blank=True, verbose_name="Estreno", null=True)
+    link = models.URLField(verbose_name="Enlace media", blank=True, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
