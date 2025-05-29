@@ -111,15 +111,15 @@ class Test_categories():
     def test_category_by_id_query(self):
         """ testing for category by id """
 
-        query = '''
-            query{
-                categoryById(id:1){
+        query = f'''
+            query{{
+                categoryById(id:{self.category.id}){{
                     name
                     description
                     onlyAdult
                     logo
-                }
-            }
+                }}
+            }}
         '''
         
         response = self.client.execute(
@@ -217,9 +217,9 @@ class Test_actors():
     def test_category_by_id_query(self):
         """ testing for actor by id """
 
-        query = '''
-            query{
-                actorById(id:1){
+        query = f'''
+            query{{
+                actorById(id:{self.actor.id}) {{
                     name
                     description
                     image
@@ -229,8 +229,8 @@ class Test_actors():
                     weight
                     genre
                     onlyAdult
-                }
-            }
+                }}
+            }}
         '''
         
         response = self.client.execute(

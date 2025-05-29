@@ -33,14 +33,6 @@
     return this;
   };
 
-  $(function () {
-    $(".unfold-admin-autocomplete.admin-autocomplete").djangoCustomSelect2();
-
-    $(".admin-autocomplete")
-      .not(".unfold-admin-autocomplete")
-      .not("[name*=__prefix__]")
-      .djangoAdminSelect2();
-  });
 
   document.addEventListener("formset:added", (event) => {
     $(event.target).find(".admin-autocomplete").djangoAdminSelect2();
