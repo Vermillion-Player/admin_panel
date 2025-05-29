@@ -1,0 +1,59 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: vermillion
+      POSTGRES_USER: vermillion
+      POSTGRES_PASSWORD: vermillion
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  api:
+    build: .
+    volumes:
+      - .:/app
+      - media_data:/app/media
+      - static_data:/app/static
+    expose:
+      - "8000"
+    depends_on:
+      - db
+    environment:
+      - DEBUG=1
+      - DJANGO_DB_HOST=db
+      - DJANGO_DB_NAME=vermillion
+      - DJANGO_DB_USER=vermillion
+      - DJANGO_DB_PASSWORD=vermillion
+
+  nginx:
+    image: nginx:1.25
+    ports:
+      - "8000:80"
+    depends_on:
+      - api
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - static_data:/app/static
+      - media_data:/app/media
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+
+volumes:
+  postgres_data:
+  media_data:
+  static_data:
+  pgadmin_data:

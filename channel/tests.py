@@ -104,21 +104,21 @@ class Test_channels():
     def test_channel_by_id_query(self):
         """ testing for channel by id """
 
-        query = '''
-            query {
-                channelById(id: 1) {
+        query = f'''
+            query {{
+                channelById(id: {self.channel.id}) {{
                     name
                     description
                     logo
                     age
-                    mainCategory {
+                    mainCategory {{
                         name
-                    }
-                    otherCategories {
+                    }}
+                    otherCategories {{
                         name
-                    }
-                }
-            }
+                    }}
+                }}
+            }}
         '''
         
         response = self.client.execute(

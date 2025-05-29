@@ -120,23 +120,23 @@ class Test_movies():
     def test_movie_by_id_query(self):
         """ Testing for movie by id """
 
-        query = '''
-            query{
-                movieById(id:1){
+        query = f'''
+            query{{
+                movieById(id:{self.movie.id}){{
                     name
                     description
                     image
                     duration
                     releaseDate
                     onlyAdult
-                    cast{
+                    cast{{
                         name
-                    }
-                    channel{
+                    }}
+                    channel{{
                         name
-                    }
-                }
-            }
+                    }}
+                }}
+            }}
         '''
         
         response = self.client.execute(

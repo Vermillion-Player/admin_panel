@@ -36,7 +36,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "unfold",  
+    "jazzmin",  
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -60,6 +60,10 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+]
 
 ROOT_URLCONF = "vermillion_player.urls"
 
@@ -85,13 +89,25 @@ WSGI_APPLICATION = "vermillion_player.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+""" CHANGE IF YOU DON'T USE DOCKER:
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+"""
 
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.environ.get("DJANGO_DB_NAME", "vermillion"),
+        "USER": os.environ.get("DJANGO_DB_USER", "vermillion"),
+        "PASSWORD": os.environ.get("DJANGO_DB_PASSWORD", "vermillion"),
+        "HOST": os.environ.get("DJANGO_DB_HOST", "db"),
+        "PORT": os.environ.get("DJANGO_DB_PORT", "5432"),
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -154,35 +170,48 @@ AUTHENTICATION_BACKENDS = [
 
 
 # PANEL CUSTOMIZATIONS:
-UNFOLD = {
-    "SITE_TITLE": "Vermillion Player - Panel",
-    "SITE_HEADER": "Vermillion Player",
-    "SITE_SUBHEADER": "Gestión de contenidos",
-    "SITE_DROPDOWN": [
-        {
-        "icon": "diamond",
-        "title": "CDN",
-        "link": "http://127.0.0.1:1500"
-    },
+
+JAZZMIN_SETTINGS = {
+    "site_title": "Vermillion Player",
+    "site_logo": "img/logo.png",  
+    "site_logo_classes": "img-circle", 
+    "welcome_sign": "Bienvenido a Vermillion Player",
+    "site_header": "Panel de control",
+    "site_brand": "Vermillion Player",
+    "copyright": "Pytonicus - GNU GENERAL PUBLIC LICENSE Version 3",
+    "show_sidebar": True,
+    "search_model": ["movie.Movie", "program.Program"],
+
+    "topmenu_links": [
+        {"model": "auth.User"},
+        {"app": "movie"},
+        {"app": "program"},
+        {"name": "CDN", "url": "http://127.0.0.1:5000", "new_window": True}
     ],
-    "SITE_ICON": {
-        "light": lambda request: static("img/logo.png"),
-        "dark": lambda request: static("img/logo.png")
-    },
-    "SITE_FAVICONS": [
-        {
-            "rel": "icon",
-            "sizes": "32x32",
-            "type": "image/png",
-            "href": lambda request: static("img/logo.png"),
-        },
+    "usermenu_links": [
+        {"name": "CDN", "url": "http://127.0.0.1:5000", "new_window": True},
+        {"model": "auth.user"}
     ],
 
-    "STYLES": [
-        lambda request: static("css/style.css"),
-    ],
-    "SCRIPTS": [
-        lambda request: static("js/script.js"),
-    ],
-    
+    "order_with_respect_to": ["auth", "core", "channel", "movie", "program"],
+
+    "custom_links": {
+        "program": [{
+            "name": "Subir episodios", 
+            "url": "http://127.0.0.1:5000", 
+            "icon": "fas fa-cloud"
+        }
+        ]
+    },
+
+    "icons": {
+        "core.actor": "fas fa-theater-masks",
+        "core.category": "fas fa-folder-open",
+        "channel.channel": "fas fa-tv",
+        "movie.movie": "fas fa-film",
+        "program.program": "fas fa-clapperboard",
+        "program.season": "fas fa-list-ol",
+        "program.episodes": "fas fa-play-circle"
+    },
+
 }

@@ -5,10 +5,10 @@ Panel de administración para gestionar contenidos de Vermillion Player.
 ## Tecnologías del proyecto
 
 1. Django: template del panel Jazzmin.
-2. PostgresSQL (pendiente - De momento utiliza SQLite)
+2. PostgresSQL 
 3. Graphql
 4. Autenticación JWT
-5. Docker (pendiente)
+5. Docker
 6. Pytest
 
 ## ¿Que contenido gestiona este proyecto?
@@ -31,11 +31,22 @@ Para trabajar sin contenedores el proyecto hacemos lo siguiente en linux o utili
 2. Crear entorno virtual: ``python -m venv .env``
 3. Arrancar entorno virtual: ``source .env/bin/activate``
 4. Instalar dependencias: ``pip install -r requirements.txt``
-5. Crear migraciones: ``python manage.py makemigrations``
-6. Lanzar migraciones: ``python manage.py migrate``
-7. Recolectar estáticos: ``python manage.py collectstatic``
-8. Crear usuario admin: ``python manage.py createsuperuser``
-9. Arrancar servidor: ``python manage.py runserver``
+5. Modificar **settings.py** y cambiar el motor de base de datos por sqlite si fuera necesario.
+6. Crear migraciones: ``python manage.py makemigrations``
+7. Lanzar migraciones: ``python manage.py migrate``
+8. Recolectar estáticos: ``python manage.py collectstatic``
+9. Crear usuario admin: ``python manage.py createsuperuser``
+10. Arrancar servidor: ``python manage.py runserver``
+
+## Despliegue con contenedores
+
+Este proyecto dispone de un orquestador con una base de datos Postgres y un PGADMIN4. De modo que para desplegar el proyecto solo hay que ejecutar:
+
+1. Despliegue: ``docker-compose up`` 
+2. Acceder al contenedor api para crear superusuario: ``sudo docker-compose exec api bash``
+3. Crear usuario admin: ``python manage.py createsuperuser``
+
+Esto realizará también todas las migraciones y recolección de archivos estáticos.
 
 ## Rutas de acceso
 
@@ -46,10 +57,20 @@ Para trabajar sin contenedores el proyecto hacemos lo siguiente en linux o utili
 
 Este proyecto utiliza la librería **pytest** para realizar los test. De modo que los comandos para trabajar son los siguientes:
 
+
+### Sin contenedores:
+
 1. Ejecutar test completo: ``pytest``
 2. Ejecutar test de una app: ``pytest channel``
 3. Comprobar cobertura de tests: ``pytest --cov --cov-config=.coveragerc``
 4. Comprobar cobertura de tests de una sola app: ``pytest --cov=channel --cov-config=.coveragerc``
+
+### Con Docker:
+
+1. Ejecutar test completo: ``sudo docker-compose exec api pytest``
+2. Ejecutar test de una app: ``sudo docker-compose exec api pytest channel``
+3. Comprobar cobertura de tests: ``sudo docker-compose exec api pytest --cov --cov-config=.coveragerc``
+4. Comprobar cobertura de tests de una sola app: ``sudo docker-compose exec api pytest --cov=channel --cov-config=.coveragerc``
 
 ## Uso de Graphql
 

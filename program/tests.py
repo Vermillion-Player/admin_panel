@@ -199,28 +199,28 @@ class Test_programs():
     def test_program_by_id_query(self):
         """ testing for program by id """
 
-        query = '''
-            query{
-                programById(id:1){
+        query = f'''
+            query{{
+                programById(id:{self.program.id}){{
                     name
                     description
                     image
                     age
-                    mainCategory{
+                    mainCategory{{
                         name
-                    }
-                    otherCategories{
+                    }}
+                    otherCategories{{
                         name
-                    }
-                    actors{
+                    }}
+                    actors{{
                         name
-                    }
+                    }}
                     releaseDate
-                    channel{
+                    channel{{
                         name
-                    }
-                }
-            }
+                    }}
+                }}
+            }}
         '''
         
         response = self.client.execute(
@@ -290,18 +290,18 @@ class Test_programs():
     def test_season_by_id_query(self):
         """ testing for season by id """
 
-        query = '''
-            query {
-                seasonById(id: 1) {
+        query = f'''
+            query {{
+                seasonById(id: {self.season.id}) {{
                     name
                     description
                     image
-                    program{
+                    program{{
                         name
-                    }
+                    }}
                     releaseDate
-                }
-            }
+                }}
+            }}
         '''
         
         response = self.client.execute(
@@ -375,25 +375,25 @@ class Test_programs():
     def test_episodes_by_id_query(self):
         """ testing for episodes by id """
 
-        query = '''
-            query {
-                episodesById(id: 1) {
+        query = f'''
+            query {{
+                episodesById(id: {self.episodes.id}) {{
                     name
                     description
                     image
                     duration
-                    program{
+                    program{{
                         name
-                    }
-                    season{
+                    }}
+                    season{{
                         name
-                    }
-                    cast{
+                    }}
+                    cast{{
                         name
-                    }
+                    }}
                     releaseDate
-                }
-            }
+                }}
+            }}
         '''
         
         response = self.client.execute(
