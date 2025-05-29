@@ -9,7 +9,7 @@ Panel de administración para gestionar contenidos de Vermillion Player.
 3. Graphql
 4. Autenticación JWT
 5. Docker (pendiente)
-6. Pytest (pendiente)
+6. Pytest
 
 ## ¿Que contenido gestiona este proyecto?
 
@@ -42,6 +42,14 @@ Para trabajar sin contenedores el proyecto hacemos lo siguiente en linux o utili
 1. Panel: ``localhost:8000/admin``
 2. Graphql: ``localhost:8000/graphql``
 
+## Testing
+
+Este proyecto utiliza la librería **pytest** para realizar los test. De modo que los comandos para trabajar son los siguientes:
+
+1. Ejecutar test completo: ``pytest``
+2. Ejecutar test de una app: ``pytest channel``
+3. Comprobar cobertura de tests: ``pytest --cov --cov-config=.coveragerc``
+4. Comprobar cobertura de tests de una sola app: ``pytest --cov=channel --cov-config=.coveragerc``
 
 ## Uso de Graphql
 
