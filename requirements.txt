@@ -29,7 +29,6 @@ Deprecated==1.2.18
 Django==5.1.7
 django-graphql-jwt==0.4.0
 django-jazzmin==3.0.1
-django-unfold==0.58.0
 docopt==0.6.2
 et_xmlfile==2.0.0
 flexcache==0.3
