@@ -8,7 +8,7 @@ class Channel(models.Model):
         ('A', 'Todo público'),
         ('7', 'Mayores de 7 años'),
         ('12', 'Mayores de 12 años'),
-        ('15', 'Mayores de 15 años'),
+        ('16', 'Mayores de 16 años'),
         ('18', 'Mayores de 18 años'),
         ('X', 'Solo adultos'),
     )
